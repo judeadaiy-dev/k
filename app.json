@@ -1,0 +1,17 @@
+{
+  "expo": {
+    "name": "SeaChat",
+    "slug": "iogd",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": { "image": "./assets/splash.png", "resizeMode": "contain", "backgroundColor": "#0F172A" },
+    "android": {
+      "package": "com.basra_dev.iogd",
+      "versionCode": 1,
+      "adaptiveIcon": { "foregroundImage": "./assets/adaptive-icon.png", "backgroundColor": "#0F172A" }
+    },
+    "extra": { "eas": { "projectId": "0b21f69d-2995-4c7b-a792-3295add40c9b" } }
+  }
+}
