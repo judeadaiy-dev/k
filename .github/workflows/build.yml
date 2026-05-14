@@ -1,0 +1,45 @@
+name: Build SeaChat APK
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: EAS Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Android APK
+        run: eas build --platform android --profile preview --non-interactive --wait
+
+      - name: Get latest build URL
+        run: |
+          BUILD_URL=$(eas build:list --platform=android --limit=1 --json --non-interactive | jq -r '.[0].artifacts.buildUrl')
+          echo "APK_URL=$BUILD_URL" >> $GITHUB_ENV
+          echo "### ✅ APK جاهز للتحميل" >> $GITHUB_STEP_SUMMARY
+          echo "$BUILD_URL" >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload APK URL
+        uses: actions/upload-artifact@v4
+        with:
+          name: SeaChat-APK
+          path: |
+            ${{ env.APK_URL }}
