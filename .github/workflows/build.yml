@@ -8,7 +8,7 @@ jobs:
   build:
     name: EAS Build
     runs-on: ubuntu-latest
-    env: 
+    env:
       EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
     steps:
       - name: Check out code
