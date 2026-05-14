@@ -1,16 +1,8 @@
 {
   "cli": {
-    "version": ">= 10.0.0",
-    "requireCommit": true
+    "version": ">= 5.9.1"
   },
   "build": {
-    "development": {
-      "developmentClient": true,
-      "distribution": "internal",
-      "android": {
-        "gradleCommand": ":app:assembleDebug"
-      }
-    },
     "preview": {
       "distribution": "internal",
       "android": {
@@ -18,18 +10,12 @@
       }
     },
     "production": {
-      "autoIncrement": true,
       "android": {
-        "buildType": "aab"
+        "buildType": "apk"
       }
     }
   },
   "submit": {
-    "production": {
-      "android": {
-        "serviceAccountKeyPath": "./google-service-account.json",
-        "track": "internal"
-      }
-    }
+    "production": {}
   }
 }
