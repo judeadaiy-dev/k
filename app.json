@@ -1,0 +1,26 @@
+{
+  "expo": {
+    "name": "Sea Chat",
+    "slug": "sea-chat-pro",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "backgroundColor": "#0A1929"
+    },
+    "android": {
+      "package": "com.seachat.app",
+      "permissions": [
+        "CAMERA",
+        "RECORD_AUDIO",
+        "READ_EXTERNAL_STORAGE",
+        "INTERNET"
+      ]
+    },
+    "plugins": [
+      "expo-router",
+      "expo-image-picker",
+      "expo-av"
+    ]
+  }
+}
