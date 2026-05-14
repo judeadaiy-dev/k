@@ -1,4 +1,4 @@
-name: Build SeaChat APK
+name: Build Android APK
 on:
   push:
     branches: [main, master]
@@ -6,12 +6,9 @@ on:
 
 jobs:
   build:
-    name: EAS Build
     runs-on: ubuntu-latest
-    env:
-      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
     steps:
-      - name: Check out code
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Node 20
@@ -26,16 +23,15 @@ jobs:
           token: ${{ secrets.EXPO_TOKEN }}
 
       - name: Install dependencies
-        run: npm install --no-package-lock
+        run: npm install
 
-      - name: Build Android APK
+      - name: Build APK
         run: eas build --platform android --profile preview --non-interactive --wait
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-          EAS_BUILD_SKIP_LOCKFILE_CHECK: 1
 
-      - name: Show APK Link
+      - name: Get APK URL
         run: |
-          BUILD_URL=$(eas build:list --platform=android --limit=1 --json --non-interactive | jq -r '.[0].artifacts.buildUrl')
-          echo "### ✅ APK جاهز للتحميل" >> $GITHUB_STEP_SUMMARY
-          echo "[$BUILD_URL]($BUILD_URL)" >> $GITHUB_STEP_SUMMARY
+          URL=$(eas build:list --platform=android --limit=1 --json --non-interactive | jq -r '.[0].artifacts.buildUrl')
+          echo "### ✅ رابط تحميل APK" >> $GITHUB_STEP_SUMMARY
+          echo "[اضغط هنا للتحميل]($URL)" >> $GITHUB_STEP_SUMMARY
