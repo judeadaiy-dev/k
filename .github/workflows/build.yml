@@ -16,7 +16,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
 
       - name: Setup EAS
         uses: expo/expo-github-action@v8
@@ -25,21 +24,13 @@ jobs:
           token: ${{ secrets.EXPO_TOKEN }}
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --no-package-lock
 
       - name: Build Android APK
         run: eas build --platform android --profile preview --non-interactive --wait
 
-      - name: Get latest build URL
+      - name: Show APK Link
         run: |
           BUILD_URL=$(eas build:list --platform=android --limit=1 --json --non-interactive | jq -r '.[0].artifacts.buildUrl')
-          echo "APK_URL=$BUILD_URL" >> $GITHUB_ENV
           echo "### ✅ APK جاهز للتحميل" >> $GITHUB_STEP_SUMMARY
-          echo "$BUILD_URL" >> $GITHUB_STEP_SUMMARY
-
-      - name: Upload APK URL
-        uses: actions/upload-artifact@v4
-        with:
-          name: SeaChat-APK
-          path: |
-            ${{ env.APK_URL }}
+          echo "[$BUILD_URL]($BUILD_URL)" >> $GITHUB_STEP_SUMMARY
