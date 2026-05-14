@@ -8,6 +8,8 @@ jobs:
   build:
     name: EAS Build
     runs-on: ubuntu-latest
+    env: 
+      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }} # اضف هذا السطر
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -28,6 +30,8 @@ jobs:
 
       - name: Build Android APK
         run: eas build --platform android --profile preview --non-interactive --wait
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }} # و اضف هذا بعد
 
       - name: Show APK Link
         run: |
