@@ -1,26 +1,15 @@
 {
   "expo": {
-    "name": "Sea Chat",
-    "slug": "sea-chat-pro",
+    "name": "SeaChat",
+    "slug": "seachat", 
     "version": "1.0.0",
-    "orientation": "portrait",
-    "userInterfaceStyle": "dark",
-    "splash": {
-      "backgroundColor": "#0A1929"
-    },
     "android": {
-      "package": "com.seachat.app",
-      "permissions": [
-        "CAMERA",
-        "RECORD_AUDIO",
-        "READ_EXTERNAL_STORAGE",
-        "INTERNET"
-      ]
+      "package": "com.basra_dev.seachat"
     },
-    "plugins": [
-      "expo-router",
-      "expo-image-picker",
-      "expo-av"
-    ]
+    "extra": {
+      "eas": {
+        "projectId": "0b21f69d-2995-4c7b-a792-3295add40c9b"
+      }
+    }
   }
 }
